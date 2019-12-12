@@ -17,4 +17,4 @@ use Illuminate\Http\Request;
     return $request->user();
 });*/
 
-Route::post('/login', 'LoginController@login');
+Route::middleware('decode')->post('login', 'LoginController@login');
