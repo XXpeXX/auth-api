@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\User;
 use Closure;
 use \Firebase\JWT\JWT;
 
@@ -18,8 +19,12 @@ class Login
 
         try {
             $decoded = JWT::decode($request->getContent(), env('JWT_KEY'), array('HS256'));
-            //$decoded_array = (array) $decoded;
             $request->logindata = $decoded;
+
+            $usuario = User::find($decoded->email);
+            if (condition) {
+                # code...
+            }
 
         } catch (\Exception $e) {
             return response("El token no es correcto", 401);
