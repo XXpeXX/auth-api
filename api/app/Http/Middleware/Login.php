@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use \Firebase\JWT\JWT;
 
-class Deszifrar
+class Login
 {
     /**
      * Handle an incoming request.
@@ -16,9 +16,16 @@ class Deszifrar
      */
     public function handle($request, Closure $next){
 
-        $decoded = JWT::decode($request->getContent(), env('JWT_KEY'), array('HS256'));
-        $decoded_array = (array) $decoded;
-        $request->attributes->add(['decoded' => $decoded_array]);
+        try {
+            $decoded = JWT::decode($request->getContent(), env('JWT_KEY'), array('HS256'));
+            //$decoded_array = (array) $decoded;
+            $request->logindata = $decoded;
+
+        } catch (\Exception $e) {
+            return response("El token no es correcto", 401);
+
+        }
+
 
         return $next($request);
     }

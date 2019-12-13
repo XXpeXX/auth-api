@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Log;
 class LoginController extends Controller
 {
     public function login(Request $request){
-        Log::alert('Email: '.$request->get('decoded')['email'].' Password: '.$request->get('decoded')['password']);
+        Log::info('Email: '.$request->logindata->email.' Password: '.$request->logindata->password);
 
         return 'Inicio de sesion correcto';
     }
