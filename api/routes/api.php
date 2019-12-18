@@ -18,3 +18,5 @@ use Illuminate\Http\Request;
 });*/
 
 Route::middleware('login')->post('login', 'LoginController@login');
+
+Route::get('/accesos', 'LoginController@accesos');

@@ -27,4 +27,9 @@ class LoginController extends Controller
 
         return 'Inicio de sesion correcto';
     }
+
+    public function accesos(){
+        $accesos = Acceso::orderBy('id', 'DESC')->get(['id', 'email', 'fecha_acceso']);
+        return response()->json($accesos);
+    }
 }
